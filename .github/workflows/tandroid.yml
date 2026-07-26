@@ -1,4 +1,4 @@
-    name: Bitepixel Build
+name: Bitepixel Build
 
 on:
   push:
@@ -43,6 +43,16 @@ jobs:
 
       - name: Install additional NDK for JNI build
         run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;27.2.12479018"
+
+      - name: Generate keystore
+        run: |
+          keytool -genkey -v \
+            -keystore TMessagesProj/config/release.keystore \
+            -alias "${{ secrets.ALIAS_NAME }}" \
+            -keyalg RSA -keysize 2048 -validity 10000 \
+            -storepass "${{ secrets.KEYSTORE_PASS }}" \
+            -keypass "${{ secrets.ALIAS_PASS }}" \
+            -dname "CN=Bitepixel, OU=Dev, O=Bitepixel, L=Unknown, S=Unknown, C=US"
 
       - name: Configure build vars
         run: |
