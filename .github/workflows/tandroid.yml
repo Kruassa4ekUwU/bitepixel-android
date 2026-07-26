@@ -42,8 +42,7 @@ jobs:
           link-to-sdk: true
 
       - name: Install additional NDK for JNI build
-        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;27.2.12479018"
-
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;27.2.12479018" "ndk;23.2.8568313"
       - name: Generate keystore
         run: |
           keytool -genkey -v \
